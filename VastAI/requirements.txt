@@ -1,1 +1,1 @@
-pandas numpy tqdm scikit-learn dropbox
+pandas numpy tqdm scikit-learn google-api-python-client tensorflow_addons
