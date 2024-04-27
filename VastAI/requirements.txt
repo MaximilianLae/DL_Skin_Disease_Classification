@@ -1,1 +1,6 @@
-pandas numpy tqdm scikit-learn google-api-python-client tensorflow_addons
+pandas 
+numpy 
+tqdm 
+scikit-learn 
+google-api-python-client 
+tensorflow_addons
