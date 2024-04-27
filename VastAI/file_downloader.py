@@ -5,8 +5,7 @@ import io
 
 SCOPES = ['https://www.googleapis.com/auth/drive']
 SERVICE_ACCOUNT_FILE = 'credentials.json'
-# FILE_ID = '1j1jFq0K_3GoSO9RWQHgRw2P3ftKVUxDh'
-FILE_ID = '1_rlFVX4PuHndfT8WmbCvCqeOQqYFuFrX'
+FILE_ID = '1j1jFq0K_3GoSO9RWQHgRw2P3ftKVUxDh'
 
 def auth():
     creds = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
@@ -14,7 +13,7 @@ def auth():
 
 def download_file(service, file_id):
     request = service.files().get_media(fileId=file_id)
-    fh = open('test.ipynb', 'wb')
+    fh = open('images.zip', 'wb')
     downloader = MediaIoBaseDownload(fh, request)
     done = False
     while done is False:
