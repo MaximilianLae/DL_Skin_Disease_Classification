@@ -4,4 +4,3 @@ tqdm
 scikit-learn 
 google-api-python-client 
 tensorflow_addons
-tensorflow[and-cuda]
