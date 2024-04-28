@@ -1,18 +1,3 @@
-# Copyright 2020 Samson Woof
-
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-
-#     http://www.apache.org/licenses/LICENSE-2.0
-
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-# ==============================================================================
-
 import numpy as np
 import tensorflow as tf
 import os
@@ -26,7 +11,7 @@ from tensorflow.keras.utils import get_file
 
 def grad_cam(model, img,
              layer_name="block5_conv3", label_name=None,
-             category_id=None):
+             category_id=None, base_model=None):
     """Get a heatmap by Grad-CAM.
 
     Args:
@@ -38,13 +23,18 @@ def grad_cam(model, img,
             it should be a list of all label names.
         category_id: An integer, index of the class.
             Default is the category with the highest score in the prediction.
+        base_model: A string, the name of the base model used. Example "VGG16".
 
     Return:
         A heatmap ndarray(without color).
     """
     img_tensor = np.expand_dims(img, axis=0)
 
-    conv_layer = model.get_layer(layer_name)
+    if base_model == None:
+        conv_layer = model.get_layer(layer_name)
+    else:
+        conv_layer = model.get_layer(base_model).get_layer(layer_name)
+
     heatmap_model = Model([model.inputs], [conv_layer.output, model.output])
 
     with tf.GradientTape() as gtape:
@@ -69,7 +59,7 @@ def grad_cam(model, img,
 
 def grad_cam_plus(model, img,
                   layer_name="block5_conv3", label_name=None,
-                  category_id=None):
+                  category_id=None, base_model=None):
     """Get a heatmap by Grad-CAM++.
 
     Args:
@@ -81,13 +71,18 @@ def grad_cam_plus(model, img,
             it should be a list of all label names.
         category_id: An integer, index of the class.
             Default is the category with the highest score in the prediction.
+        base_model: A string, the name of the base model used. Example "VGG16".
 
     Return:
         A heatmap ndarray(without color).
     """
     img_tensor = np.expand_dims(img, axis=0)
 
-    conv_layer = model.get_layer(layer_name)
+    if base_model == None:
+        conv_layer = model.get_layer(layer_name)
+    else:
+        conv_layer = model.get_layer(base_model).get_layer(layer_name)
+
     heatmap_model = Model([model.inputs], [conv_layer.output, model.output])
 
     with tf.GradientTape() as gtape1:
