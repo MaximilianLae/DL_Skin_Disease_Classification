@@ -7,6 +7,7 @@ information such as malignant/benign, angle scores, and the URL of the images of
 lesions. The column "label" from the CSV file is your target column. The annotated images
 represent 114 skin conditions, with at least 53 images and a maximum of 653 images per skin
 condition.
+
 The dataset of images was taken from the “FITZPATRICK17” repository. The Fitzpatrick
 scale is a numerical classification schema for human skin color. It was developed in 1975 by
 American dermatologist Thomas B. Fitzpatrick to estimate the response of different types of
